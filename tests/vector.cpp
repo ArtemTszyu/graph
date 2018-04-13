@@ -1,8 +1,6 @@
 #include <catch.hpp>
 #include <sstream>
 
-#include "queue.hpp"
-
 TEST_CASE("creating queue")
 {
 	queue_t<int> queue;
