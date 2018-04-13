@@ -5,19 +5,19 @@
 
 TEST_CASE("creating queue")
 {
-	queue_t queue;
+	queue_t<int> queue;
 	REQUIRE( queue.head() == 0 );
 	REQUIRE( queue.tail() == 0 );
 }
 
 TEST_CASE("copying queue")
 {
-	queue_t<int> list;
-	list.push(1);
-	list.push(2);
-	queue_t<int> list2(list);
-	int sum = list2.pop();
-	sum = sum + list2.pop();
+	queue_t<int> queue;
+	queue.push(1);
+	queue.push(2);
+	queue_t<int> queue2(queue);
+	int sum = queue2.pop();
+	sum = sum + queue2.pop();
 	REQUIRE( sum == 3 );
 	
 }
