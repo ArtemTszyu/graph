@@ -1,6 +1,4 @@
-#include <iostream>
-#include <sstream>
-#include <string>
+
 
 template <typename T>
 class queue_t
@@ -22,21 +20,28 @@ public:
         tail = nullptr;
     }
     
-        queue_t(queue_t const& other)
+       queue_t(queue_t<T> const & other)
+	{
+		node_t* node = other.head_();
+        	while(node != nullptr){
+			push(node->value);
+			node = node->next;
+		}
+        	
+	}
+	
+    queue_t<T> & operator=(queue_t<T> & other)
     {
-        node_t* node = other.head;
-        head = new node_t;
-        head->value = node->value;
-        head->next = nullptr;
-        tail = head;
-        node = node->next;
+	    if(other.head_() != nullptr){
+		    this->~queue_t();
+             }
+
+        node_t* node = other.head_();
         while(node != nullptr){
-            tail->next = new node_t;
-            tail = tail->next;
-            tail->value = node->value;
-            tail->next = nullptr;
-            node = node->next;
-        }
+		push(node->value);
+		node = node->next;
+	}
+        return *this;
     }
     
     ~queue_t()
@@ -46,6 +51,21 @@ public:
             del (head);
         }
     }
+    
+    node_t * heado() {
+		return head;
+	}
+	node_t * tailo() {
+		return tail;
+	}
+	
+	T headl(node_t* heado){
+		return heado->value;
+	}
+	
+	T taill(node_t* tailo){
+		return tailo->value;
+	}
 
     void del(node_t* run_)
     {
