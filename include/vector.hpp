@@ -1,27 +1,86 @@
 #include <iostream>
+#include <sstream>
+#include <string>
 
-class vector_t
+template <typename T>
+class queue_t
 {
 private:
-	int * elements_;
-	std::size_t size_;
-	std::size_t capacity_;
+    struct node_t
+    {
+        node_t* next;
+        T value;
+    };
+private:
+    node_t* head;
+    node_t* tail;
+
 public:
-	vector_t();
-	vector_t(vector_t const & other);
-	vector_t & operator =(vector_t const & other);
-	~vector_t();
+    queue_t()
+    {
+        head = nullptr;
+        tail = nullptr;
+    }
+    
+        queue_t(queue_t const& other)
+    {
+        node_t* node = other.head;
+        head = new node_t;
+        head->value = node->value;
+        head->next = nullptr;
+        tail = head;
+        node = node->next;
+        while(node != nullptr){
+            tail->next = new node_t;
+            tail = tail->next;
+            tail->value = node->value;
+            tail->next = nullptr;
+            node = node->next;
+        }
+    }
+    
+    ~queue_t()
+    {
+        if (head != nullptr)
+        {
+            del (head);
+        }
+    }
 
-	std::size_t size() const;
-	std::size_t capacity() const;
-
-	void push_back(int value);
-	void pop_back();
-
-	int & operator [](std::size_t index);
-	int operator [](std::size_t index) const;
-
-	bool operator ==(vector_t const & other) const;
+    void del(node_t* run_)
+    {
+        if (run_ != nullptr)
+        {
+            if (run_->next != nullptr)
+            {
+                del(run_->next);
+            }
+            delete run_;
+        }
+    }
+    
+    void push(T value ){    
+        if (head == nullptr)
+        {
+            head = new node_t;
+            head->value = value;
+            tail = head;
+        }
+        else
+        {
+            tail->next = *new node_t;
+            tail = tail->next;
+            tail->next = nullptr;
+        }
+    }
+    void pop (T value){
+        if (head != nullptr){
+            T deleted = head->value;
+            node_t param = head;
+            head = nullptr;
+            delete param;
+            return deleted;
+        }
+    }
+            
 };
-
-bool operator !=(vector_t const & lhs, vector_t const & rhs);
