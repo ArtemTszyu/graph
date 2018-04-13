@@ -100,7 +100,6 @@ public:
             node_t param = head;
             head = nullptr;
             delete param;
-            return deleted;
         }
     }
             
