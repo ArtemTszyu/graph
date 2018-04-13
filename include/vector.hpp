@@ -1,4 +1,7 @@
+#include <catch.hpp>
+#include <sstream>
 
+#include "queue.hpp"
 
 template <typename T>
 class queue_t
