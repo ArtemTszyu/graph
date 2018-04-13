@@ -34,11 +34,11 @@ public:
 	
     queue_t<T> & operator=(queue_t<T> & other)
     {
-	    if(other.head_() != nullptr){
+	    if(other.heado() != nullptr){
 		    this->~queue_t();
              }
 
-        node_t* node = other.head_();
+        node_t* node = other.heado();
         while(node != nullptr){
 		push(node->value);
 		node = node->next;
@@ -90,18 +90,24 @@ public:
         }
         else
         {
-            tail->next = *new node_t;
+            tail->next = new node_t;
             tail = tail->next;
             tail->next = nullptr;
         }
     }
-    void pop (){
-        if (head != nullptr){
-            T deleted = head->value;
-            node_t param = head;
-            head = nullptr;
-            delete param;
+ T pop (){
+   if(head != nullptr){
+        T deleted = head->value;
+        node_t* node = head;
+        head = head->next;
+	if(head == nullptr){
+		tail = nullptr;
+	}
+        delete node;
+        return deleted;
         }
-    }
-            
+   else {
+	   throw std::logic_error("Error");
+   }
+  }           
 };
