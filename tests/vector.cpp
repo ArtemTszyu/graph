@@ -1,7 +1,7 @@
 #include <catch.hpp>
 #include <sstream>
 
-#include "vector.hpp"
+#include "queue.hpp"
 
 TEST_CASE("creating queue")
 {
@@ -30,16 +30,16 @@ TEST_CASE("pushing elements int")
 	queue_t <int> queue;
 
 	queue.push(1);
-	REQUIRE( queue.heado() == 1 );
-	REQUIRE( queue.tailo() == 1 );
+	REQUIRE( queue.headl(queue.heado()) == 1 );
+	REQUIRE( queue.taill(queue.tailo()) == 1 );
 
 	queue.push(2);
-	REQUIRE( queue.heado() == 1 );
-	REQUIRE( queue.tailo() == 2 );
+	REQUIRE( queue.headl(queue.heado()) == 1 );
+	REQUIRE( queue.taill(queue.tailo()) == 2 );
 
 	queue.push(3);
-	REQUIRE( queue.heado() == 1 );
-	REQUIRE( queue.tailo() == 3 );
+	REQUIRE( queue.headl(queue.heado()) == 1 );
+	REQUIRE( queue.taill(queue.tailo()) == 3 );
 }
 
 TEST_CASE("pushing elements double")
@@ -47,16 +47,16 @@ TEST_CASE("pushing elements double")
 	queue_t <double> queue;
 
 	queue.push(1);
-	REQUIRE( queue.heado() == 1 );
-	REQUIRE( queue.tailo() == 1 );
+	REQUIRE( queue.headl(queue.heado()) == 1 );
+	REQUIRE( queue.taill(queue.tailo()) == 1 );
 
 	queue.push(2);
-	REQUIRE( queue.heado() == 1 );
-	REQUIRE( queue.tailo() == 2 );
+	REQUIRE( queue.headl(queue.heado()) == 1 );
+	REQUIRE( queue.taill(queue.tailo()) == 2 );
 
 	queue.push(3);
-	REQUIRE( queue.heado() == 1 );
-	REQUIRE( queue.tailo() == 3 );
+	REQUIRE( queue.headl(queue.heado()) == 1 );
+	REQUIRE( queue.taill(queue.tailo()) == 3 );
 }
 
 TEST_CASE("poping elements int")
@@ -69,16 +69,16 @@ TEST_CASE("poping elements int")
 	queue.push(4);
 
 	queue.pop();
-	REQUIRE( queue.heado() == 2 );
-	REQUIRE( queue.tailo() == 4 );
+	REQUIRE( queue.headl(queue.heado()) == 2 );
+	REQUIRE( queue.taill(queue.tailo()) == 4 );
 
 	queue.pop();
-	REQUIRE( queue.heado() == 3 );
-	REQUIRE( queue.tailo() == 4 );
+	REQUIRE( queue.headl(queue.heado()) == 3 );
+	REQUIRE( queue.taill(queue.tailo()) == 4 );
 
 	queue.pop();
-	REQUIRE( queue.heado() == 4 );
-	REQUIRE( queue.tailo() == 4 );
+	REQUIRE( queue.headl(queue.heado()) == 4 );
+	REQUIRE( queue.taill(queue.tailo()) == 4 );
 }
 
 TEST_CASE("poping elements double")
@@ -91,14 +91,14 @@ TEST_CASE("poping elements double")
 	queue.push(4);
 
 	queue.pop();
-	REQUIRE( queue.heado() == 2 );
-	REQUIRE( queue.tailo() == 4 );
+	REQUIRE( queue.headl(queue.heado()) == 2 );
+	REQUIRE( queue.taill(queue.tailo()) == 4 );
 
 	queue.pop();
-	REQUIRE( queue.heado() == 3 );
-	REQUIRE( queue.tailo() == 4 );
+	REQUIRE( queue.headl(queue.heado()) == 3 );
+	REQUIRE( queue.taill(queue.tailo()) == 4 );
 
 	queue.pop();
-	REQUIRE( queue.heado() == 4 );
-	REQUIRE( queue.tailo() == 4 );
+	REQUIRE( queue.headl(queue.heado()) == 4 );
+	REQUIRE( queue.taill(queue.tailo()) == 4 );
 }
