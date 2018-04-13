@@ -6,8 +6,8 @@
 TEST_CASE("creating queue")
 {
 	queue_t<int> queue;
-	REQUIRE( queue.head() == 0 );
-	REQUIRE( queue.tail() == 0 );
+	REQUIRE( queue.heado() == nullptr );
+	REQUIRE( queue.tailo() == nullptr );
 }
 
 TEST_CASE("copying queue")
@@ -30,16 +30,16 @@ TEST_CASE("pushing elements int")
 	queue_t <int> queue;
 
 	queue.push(1);
-	REQUIRE( queue.head() == 1 );
-	REQUIRE( queue.tail() == 1 );
+	REQUIRE( queue.heado() == 1 );
+	REQUIRE( queue.tailo() == 1 );
 
 	queue.push(2);
-	REQUIRE( queue.head() == 1 );
-	REQUIRE( queue.tail() == 2 );
+	REQUIRE( queue.heado() == 1 );
+	REQUIRE( queue.tailo() == 2 );
 
 	queue.push(3);
-	REQUIRE( queue.head() == 1 );
-	REQUIRE( queue.tail() == 3 );
+	REQUIRE( queue.heado() == 1 );
+	REQUIRE( queue.tailo() == 3 );
 }
 
 TEST_CASE("pushing elements double")
@@ -47,16 +47,16 @@ TEST_CASE("pushing elements double")
 	queue_t <double> queue;
 
 	queue.push(1);
-	REQUIRE( queue.head() == 1 );
-	REQUIRE( queue.tail() == 1 );
+	REQUIRE( queue.heado() == 1 );
+	REQUIRE( queue.tailo() == 1 );
 
 	queue.push(2);
-	REQUIRE( queue.head() == 1 );
-	REQUIRE( queue.tail() == 2 );
+	REQUIRE( queue.heado() == 1 );
+	REQUIRE( queue.tailo() == 2 );
 
 	queue.push(3);
-	REQUIRE( queue.head() == 1 );
-	REQUIRE( queue.tail() == 3 );
+	REQUIRE( queue.heado() == 1 );
+	REQUIRE( queue.tailo() == 3 );
 }
 
 TEST_CASE("poping elements int")
@@ -69,16 +69,16 @@ TEST_CASE("poping elements int")
 	queue.push(4);
 
 	queue.pop();
-	REQUIRE( queue.head() == 2 );
-	REQUIRE( queue.tail() == 4 );
+	REQUIRE( queue.heado() == 2 );
+	REQUIRE( queue.tailo() == 4 );
 
 	queue.pop();
-	REQUIRE( queue.head() == 3 );
-	REQUIRE( queue.tail() == 4 );
+	REQUIRE( queue.heado() == 3 );
+	REQUIRE( queue.tailo() == 4 );
 
 	queue.pop();
-	REQUIRE( queue.head() == 4 );
-	REQUIRE( queue.tail() == 4 );
+	REQUIRE( queue.heado() == 4 );
+	REQUIRE( queue.tailo() == 4 );
 }
 
 TEST_CASE("poping elements double")
@@ -91,14 +91,14 @@ TEST_CASE("poping elements double")
 	queue.push(4);
 
 	queue.pop();
-	REQUIRE( queue.head() == 2 );
-	REQUIRE( queue.tail() == 4 );
+	REQUIRE( queue.heado() == 2 );
+	REQUIRE( queue.tailo() == 4 );
 
 	queue.pop();
-	REQUIRE( queue.head() == 3 );
-	REQUIRE( queue.tail() == 4 );
+	REQUIRE( queue.heado() == 3 );
+	REQUIRE( queue.tailo() == 4 );
 
 	queue.pop();
-	REQUIRE( queue.head() == 4 );
-	REQUIRE( queue.tail() == 4 );
+	REQUIRE( queue.heado() == 4 );
+	REQUIRE( queue.tailo() == 4 );
 }
