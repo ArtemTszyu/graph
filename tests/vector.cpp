@@ -1,119 +1,62 @@
 #include <catch.hpp>
 #include <sstream>
 
-#include "vector.hpp"
+#include "queue.hpp"
 
-TEST_CASE("creating vector")
+TEST_CASE("creating queue")
 {
-	vector_t vector;
-	REQUIRE( vector.size() == 0 );
-	REQUIRE( vector.capacity() == 0 );
+	queue_t queue;
+	REQUIRE( queue.head() == 0 );
+	REQUIRE( queue.tail() == 0 );
 }
 
-TEST_CASE("copying vector")
+TEST_CASE("copying queue")
 {
-	vector_t vector;
-	vector.push_back(1);
-
-	vector_t copy(vector);
-	REQUIRE( copy == vector );
-}
-
-TEST_CASE("assigning vector")
-{
-	vector_t vector1;
-	vector_t vector2;
-
-	vector1.push_back(1);
-	vector2.push_back(2);
-
-	vector1 = vector2;
-	REQUIRE( vector1 == vector2 );
-}
-
-TEST_CASE("equaling vector")
-{
-	vector_t vector1;
-	vector_t vector2;
-
-	vector1.push_back(1);
-	vector2.push_back(1);
-
-	REQUIRE( vector1 == vector2 );
-
-	vector1.push_back(2);
-	REQUIRE( vector1 != vector2 );
-}
-
-TEST_CASE("indexing vector")
-{
-	vector_t vector;
-
-	vector.push_back(1);
-
-	REQUIRE( vector[0] == 1 );
-
-	vector_t const copy(vector);
-	REQUIRE( copy[0] == 1 );
+	queue_t<int> list;
+	list.push(1);
+	list.push(2);
+	queue_t<int> list2(list);
+	int sum = list2.pop();
+	sum = sum + list2.pop();
+	REQUIRE( sum == 3 );
+	
 }
 
 TEST_CASE("pushing elements")
 {
-	vector_t vector;
+	queue_t queue;
 
-	vector.push_back(1);
-	REQUIRE( vector.size() == 1 );
-	REQUIRE( vector.capacity() == 1 );
+	queue.push(1);
+	REQUIRE( queue.head() == 1 );
+	REQUIRE( queue.tail() == 1 );
 
-	vector.push_back(2);
-	REQUIRE( vector.size() == 2 );
-	REQUIRE( vector.capacity() == 2 );
+	queue.push(2);
+	REQUIRE( queue.head() == 1 );
+	REQUIRE( queue.tail() == 2 );
 
-	vector.push_back(3);
-	REQUIRE( vector.size() == 3 );
-	REQUIRE( vector.capacity() == 4 );
-
-	vector.push_back(4);
-	REQUIRE( vector.size() == 4 );
-	REQUIRE( vector.capacity() == 4 );
-
-	vector.push_back(5);
-	REQUIRE( vector.size() == 5 );
-	REQUIRE( vector.capacity() == 8 );
+	queue.push(3);
+	REQUIRE( queue.head() == 1 );
+	REQUIRE( queue.tail() == 3 );
 }
 
 TEST_CASE("poping elements")
 {
-	vector_t vector;
+	queue_t queue;
 
-	vector.push_back(1);
-	vector.push_back(2);
-	vector.push_back(3);
-	vector.push_back(4);
-	vector.push_back(5);
-	vector.push_back(6);
+	queue.push(1);
+	queue.push(2);
+	queue.push(3);
+	queue.push(4);
 
-	vector.pop_back();
-	REQUIRE( vector.size() == 5 );
-	REQUIRE( vector.capacity() == 8 );
+	queue.pop();
+	REQUIRE( queue.head() == 2 );
+	REQUIRE( queue.tail() == 4 );
 
-	vector.pop_back();
-	REQUIRE( vector.size() == 4 );
-	REQUIRE( vector.capacity() == 8 );
+	queue.pop();
+	REQUIRE( queue.head() == 3 );
+	REQUIRE( queue.tail() == 4 );
 
-	vector.pop_back();
-	REQUIRE( vector.size() == 3 );
-	REQUIRE( vector.capacity() == 8 );
-
-	vector.pop_back();
-	REQUIRE( vector.size() == 2 );
-	REQUIRE( vector.capacity() == 4 );
-
-	vector.pop_back();
-	REQUIRE( vector.size() == 1 );
-	REQUIRE( vector.capacity() == 2 );
-
-	vector.pop_back();
-	REQUIRE( vector.size() == 0 );
-	REQUIRE( vector.capacity() == 1 );
+	queue.pop();
+	REQUIRE( queue.head() == 4 );
+	REQUIRE( queue.tail() == 4 );
 }
