@@ -97,13 +97,9 @@ public:
     }
  T pop (){
    if(head != nullptr){
-        T deleted = head->value;
-        node_t* node = head;
-        head = head->next;
-	if(head == nullptr){
-		tail = nullptr;
-	}
-        delete node;
+ 	node_t* node = head->next;
+	Delete head;
+	head=node;
         }
    else {
 	   throw std::logic_error("Error");
