@@ -97,7 +97,7 @@ public:
  T pop (){
    if(head != nullptr){
  	node_t* node = head->next;
-	Delete head;
+	delete head;
 	head=node;
         }
    else {
