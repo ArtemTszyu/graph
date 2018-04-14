@@ -10,7 +10,7 @@ TEST_CASE("creating queue")
 	REQUIRE( queue.tailo() == nullptr );
 }
 
-TEST_CASE("copying queue")
+TEST_CASE("copy queue")
 {
 	queue_t<int> queue;
 	queue_t<int> queue2;
