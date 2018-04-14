@@ -27,7 +27,7 @@ public:
 	}
 	node_t * tailo() {
 		return tail;
-		
+	}
 	T taill(node_t* tailo){
 		return tailo->value;
 	}
