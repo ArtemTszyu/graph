@@ -94,7 +94,7 @@ public:
             tail->next = nullptr;
         }
     }
- T pop (){
+ void pop (){
    if(head != nullptr){
  	node_t* node = head->next;
 	delete head;
