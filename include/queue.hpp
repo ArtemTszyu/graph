@@ -85,6 +85,7 @@ public:
         {
             head = new node_t;
             head->value = val;
+            head->next = nullptr;
             tail = head;
         }
         else
