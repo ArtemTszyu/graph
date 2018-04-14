@@ -95,18 +95,22 @@ public:
             tail->next = nullptr;
         }
     }
- T pop (){
-   if(head != nullptr){
-        T deleted = head->value;
-        node_t* node = head;
-        head = head->next;
-	if(head == nullptr){
-		tail = nullptr;
-	}
-        delete node;
+	
+	T pop (){
+        if( !head ) {
+            throw std::logic_error("empty queue");
         }
-   else {
-	   throw std::logic_error("Error");
-   }
-  }           
-};
+        
+        T value = head->value;
+        node_t * old_head = head;
+        
+        head = head->next;
+        if( !head ){
+            tail = nullptr;
+        }
+        
+        delete old_head;
+        
+        return value;
+    }
+ };
