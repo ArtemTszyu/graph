@@ -102,3 +102,9 @@ TEST_CASE("poping elements double")
 	REQUIRE( queue.headl(queue.heado()) == 4 );
 	REQUIRE( queue.taill(queue.tailo()) == 4 );
 }
+
+TEST_CASE("Error")
+{
+	queue_t<int> queue;
+	REQUIRE_THROWS_AS( queue.pop() , std::logic_error);
+}
