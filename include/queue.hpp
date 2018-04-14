@@ -21,6 +21,20 @@ public:
         head = nullptr;
         tail = nullptr;
     }
+	
+	    node_t * heado() {
+		return head;
+	}
+	node_t * tailo() {
+		return tail;
+		
+	T taill(node_t* tailo){
+		return tailo->value;
+	}
+	
+	T headl(node_t* heado){
+		return heado->value;
+	}
     
        queue_t(queue_t<T> const & other)
 	{
@@ -53,21 +67,6 @@ public:
             del (head);
         }
     }
-    
-    node_t * heado() {
-		return head;
-	}
-	node_t * tailo() {
-		return tail;
-	}
-	
-	T headl(node_t* heado){
-		return heado->value;
-	}
-	
-	T taill(node_t* tailo){
-		return tailo->value;
-	}
 
     void del(node_t* run_)
     {
