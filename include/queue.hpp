@@ -91,6 +91,7 @@ public:
         {
             tail->next = new node_t;
             tail = tail->next;
+            tail->value = val;
             tail->next = nullptr;
         }
     }
