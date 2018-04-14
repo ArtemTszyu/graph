@@ -24,7 +24,7 @@ public:
     
        queue_t(queue_t<T> const & other)
 	{
-		node_t* node = other.head_();
+		node_t* node = other.heado();
         	while(node != nullptr){
 			push(node->value);
 			node = node->next;
