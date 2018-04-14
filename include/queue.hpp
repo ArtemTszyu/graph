@@ -80,18 +80,18 @@ public:
         }
     }
     
-    void push(T value ){    
+    void push(T val ){    
         if (head == nullptr)
         {
             head = new node_t;
-            head->value = value;
+            head->value = val;
             tail = head;
         }
         else
         {
             tail->next = new node_t;
             tail = tail->next;
-            tail->value = value;
+            tail->value = val;
             tail->next = nullptr;
         }
     }
