@@ -104,7 +104,6 @@ public:
 		tail = nullptr;
 	}
         delete node;
-        return deleted;
         }
    else {
 	   throw std::logic_error("Error");
