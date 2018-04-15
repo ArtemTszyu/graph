@@ -96,12 +96,15 @@ public:
             tail->next = nullptr;
         }
     }
- void pop (){
+ T pop (){
    if(head != nullptr){
+	T previoushead = head->value;
  	node_t* node = head->next;
 	delete head;
 	head=node;
         }
+	 return previoushead;
+	delete node;
    else {
 	   throw std::logic_error("Error");
    }
