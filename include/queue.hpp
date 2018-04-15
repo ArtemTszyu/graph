@@ -102,9 +102,9 @@ public:
  	node_t* node = head->next;
 	delete head;
 	head=node;
-        }
-	 return previoushead;
+	return previoushead;
 	delete node;
+        }
    else {
 	   throw std::logic_error("Error");
    }
