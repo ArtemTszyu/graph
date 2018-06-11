@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ArtemTszyu/queue.svg?branch=master)](https://travis-ci.org/ArtemTszyu/queue)
+[![Build Status](https://travis-ci.org/ArtemTszyu/graph.svg?branch=master)](https://travis-ci.org/ArtemTszyu/graph)
 
 ```
 cmake -H. -B_builds -DBUILD_TESTS=ON
