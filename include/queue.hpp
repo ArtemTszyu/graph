@@ -1,112 +1,110 @@
 #include <iostream>
 #include <sstream>
-#include <utility>
+#include <vector>
+#include<string>
+#include<stdexcept>
 
-template <typename T>
-class queue_t
+class graph_t
 {
 private:
-    struct node_t
+    unsigned count_of_verticals;
+    bool ** data;
+public:
+    graph_t(unsigned N)
     {
-        node_t* next;
-        T value;
-    };
+        count_of_verticals = N;
+        data = new bool * [count_of_verticals];
+        for (std::size_t i = 0; i < count_of_verticals; ++i)
+        {
+            data[i] = new bool [count_of_verticals];
+        }
+    }
+
+    graph_t()
+    {
+        count_of_verticals = 0;
+        data = nullptr;
+    }
+
+    graph_t & operator=(graph_t const &) = delete;
+
+    graph_t(graph_t const &) = delete;
+
+    ~graph_t()
+    {
+        for (std::size_t i = 0; i < count_of_verticals; ++i)
+        {
+            delete[] data[i];
+        }
+        delete[] data;
+    }
+
+    unsigned size_count_of_verticals()
+    {
+        return count_of_verticals;
+    }
+
+    void read(std::istringstream& stream);
+
 private:
-    node_t* head;
-    node_t* tail;
+    void help(unsigned index, std::vector<unsigned> & used, std::vector<unsigned> & res)
+    {
+        used[index] = true;
+        res.push_back(index + 1);
+        for (unsigned j = 0; j < count_of_verticals; j++) {
+            if (data[index][j])
+            {
+                if (!(used)[j])
+                {
+                    help(j, used, res);
+                }
+            }
+        }
+    }
 
 public:
-    queue_t()
-    {
-        head = nullptr;
-        tail = nullptr;
-    }
-	
-	    node_t * heado() {
-		return head;
-	}
-	node_t * tailo() {
-		return tail;
-	}
-	T taill(node_t* tailo){
-		return tailo->value;
-	}
-	
-	T headl(node_t* heado){
-		return heado->value;
-	}
-    
-       queue_t(queue_t<T> const & other)
-	{
-		node_t* node = other.heado();
-        	while(node != nullptr){
-			push(node->value);
-			node = node->next;
-		}
-        	
-	}
-	
-    queue_t<T> & operator=(queue_t<T> & other)
-    {
-	    if(other.heado() != nullptr){
-		    this->~queue_t();
-             }
+    void res_graph(std::ostream & ostream, std::vector<unsigned> res);
 
-        node_t* node = other.heado();
-        while(node != nullptr){
-		push(node->value);
-		node = node->next;
-	}
-        return *this;
-    }
-    
-    ~queue_t()
+    std::vector<unsigned> dfs(unsigned index)
     {
-        if (head != nullptr)
-        {
-            del (head);
+        std::vector<unsigned> used, res;
+        used.reserve(count_of_verticals);
+        for (unsigned i = 0; i < count_of_verticals; i++) {
+            used.push_back(false);
         }
+        help(index, used, res);
+        return res;
     }
-
-    void del(node_t* run_)
-    {
-        if (run_ != nullptr)
-        {
-            if (run_->next != nullptr)
-            {
-                del(run_->next);
-            }
-            delete run_;
-        }
-    }
-    
-    void push(T val ){    
-        if (head == nullptr)
-        {
-            head = new node_t;
-            head->value = val;
-            head->next = nullptr;
-            tail = head;
-        }
-        else
-        {
-            tail->next = new node_t;
-            tail = tail->next;
-            tail->value = val;
-            tail->next = nullptr;
-        }
-    }
- T pop (){
-   if(head != nullptr){
-	T previoushead = head->value;
- 	node_t* node = head->next;
-	delete head;
-	head=node;
-	return previoushead;
-	delete node;
-        }
-   else {
-	   throw std::logic_error("Error");
-   }
-  }           
 };
+
+void graph_t::read(std::istringstream& stream)
+{
+    for (std::size_t i = 0; i < count_of_verticals; i++)
+    {
+        for (std::size_t j = 0; j < count_of_verticals; j++)
+        {
+            unsigned a;
+            if (stream >> a)
+            {
+                if (a == 1 || a == 0)
+                {
+                    data[i][j] = a;
+                }
+                else throw std::invalid_argument("Error 1");
+            }
+        }
+        if (data[i][i] != 0)
+        {
+            throw std::invalid_argument("Error 2");
+        }
+    }
+}
+
+void graph_t::res_graph(std::ostream & ostream, std::vector<unsigned> res)
+{
+    for (unsigned i : res)
+    {
+        ostream << i << ' ';
+    }
+
+}
